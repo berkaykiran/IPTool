@@ -59,7 +59,7 @@ let getIp = as => {
             // x.x.x.x/x
             ipCIDRArray = [...new Set(ipCIDRFromHttp(objects))];
 
-            //{object}
+            //{object from lib}
             ipObject = ipCIDRArray.map(el => getIpRangeFromAddressAndNetmask(el));
 
             //xxxxxxxxx,xxxxxxxxx
