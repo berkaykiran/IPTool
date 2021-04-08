@@ -1,3 +1,22 @@
+function get(asn) {
+    return new Promise(function (resolve, reject) {
+        var req = new XMLHttpRequest();
+        req.open('GET', `https://a.smrtrdrct.com/iptool/get.php?asn=${asn}`, true);
+        req.onload = function () {
+            if (req.status == 200) {
+                resolve(JSON.parse(req.response).objects.object);
+            }
+            else {
+                reject(Error(req.statusText));
+            }
+        };
+        req.onerror = function () {
+            reject(Error("Network Error"));
+        };
+        req.send();
+    });
+}
+
 function ipCIDRFromHttp(array) {
     return array.map((element) => {
         var temp;
@@ -30,7 +49,7 @@ function filterOverlaps(arr, lowKey, highKey) {
     return arrayOverlapFix;
 }
 
-function mergeDecimalIpRanges(arr){
+function mergeDecimalIpRanges(arr) {
     tempMergedDecimalIpRangeArray = [];
     for (let i = 0; i < arr.length - 1; i++) {
         var first_decimal = arr[i][0];
@@ -46,7 +65,40 @@ function mergeDecimalIpRanges(arr){
     return tempMergedDecimalIpRangeArray;
 }
 
+function reverseDecimalIpRange(arr) {
+    temp_arr = [[16777216, arr[0][0] - 1]];//bogon before 1.0.0.0
+    for (let i = 0; i < arr.length - 1; i++) {
+        temp_arr.push([arr[i][1] + 1, arr[i + 1][0] - 1]);
+    }
+    temp_arr.push([arr[arr.length - 1][1] + 1, 3758096383]);//bogon after 224.0.0.0
+    return temp_arr;
+}
+
 {
+    function returnOptimizedRange(arr, key, pref) {
+        reversedCidr = arr.map(element => {
+            return [IpSubnetCalculator.calculate(element[0], element[1])];
+        });
+        let newArray = [];
+        getAllId(reversedCidr, key, pref, newArray);
+        return newArray;
+    }
+    function getAllId(arr, key, pref, tempArr) {
+        arr.forEach((item) => {
+            for (let keys in item) {
+                if (keys === key) {
+                    tempArr.push(item[key] + '/' + item[pref]);
+                } else if (Array.isArray(item[keys])) {
+                    getAllId(item[keys], key, pref, tempArr);
+                }
+            }
+        });
+    }
+}
+
+////////////////////////////////////////////////
+
+/*{
     function returnOptimizedRange(arr, key, pref) {
         let newArray = [];
         getAllId(arr, key, pref, newArray);
@@ -74,24 +126,7 @@ function reverseDecimalIPRangeFromArray(arr) {
     return temp_arr;
 }
 
-function get(asn) {
-    return new Promise(function (resolve, reject) {
-        var req = new XMLHttpRequest();
-        req.open('GET', `https://a.smrtrdrct.com/iptool/get.php?asn=${asn}`, true);
-        req.onload = function () {
-            if (req.status == 200) {
-                resolve(JSON.parse(req.response).objects.object);
-            }
-            else {
-                reject(Error(req.statusText));
-            }
-        };
-        req.onerror = function () {
-            reject(Error("Network Error"));
-        };
-        req.send();
-    });
-}
+*/
 
 /*let getIp = asn => {
     var xhttp = new XMLHttpRequest();
