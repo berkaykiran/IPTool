@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src='lib/ip-subnet-calculator.js'></script>
+    <script src="res/ripe.js"></script>
+    <script src="res/ui.js" defer></script>
+
+</head>
+<body>
+    <form id="asn_form">
+        <input type="text" id="asn" name="asn" placeholder="ASN" value="AS16135,AS9121">
+        <input type="button" value="Get IP Ranges" id="getIPs">
+    </form>
+
+    <textarea name="" id="textArea" cols="30" rows="10"></textarea>
+    
+</body>
+</html>
