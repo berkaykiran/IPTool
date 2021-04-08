@@ -33,7 +33,7 @@ document.getElementById('getIPs').onclick = () => {
         console.log(mergedDecimalIpRangeArray.join('\n'));
         console.log(reversedDecimalIpRange.join('\n'));
 
-        textArea.value = optimizedRange.join('\n');
+        textAreaForRipe.value = optimizedRange.join('\n');
 
     });
 }
