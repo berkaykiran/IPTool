@@ -35,5 +35,8 @@ document.getElementById('getIPs').onclick = () => {
 
         textAreaForRipe.value = optimizedRange.join('\n');
 
-    });
+    }).catch(error => {
+        textAreaForRipe.value = `ASN ${error.message}`;
+        console.log(error.message);
+    });;
 }

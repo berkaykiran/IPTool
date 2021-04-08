@@ -5,8 +5,7 @@ function get(asn) {
         req.onload = function () {
             if (req.status == 200) {
                 resolve(JSON.parse(req.response).objects.object);
-            }
-            else {
+            } else {
                 reject(Error(req.statusText));
             }
         };
