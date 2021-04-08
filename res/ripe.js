@@ -1,7 +1,7 @@
 function get(asn) {
     return new Promise(function (resolve, reject) {
         var req = new XMLHttpRequest();
-        req.open('GET', `https://a.smrtrdrct.com/iptool/get.php?asn=${asn}`, true);
+        req.open('GET', `get.php?asn=${asn}`, true);
         req.onload = function () {
             if (req.status == 200) {
                 resolve(JSON.parse(req.response).objects.object);
