@@ -24,14 +24,14 @@
 
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Get From RIPE.net</button>
-                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+                <button class="nav-link active" id="nav-ripe-tab" data-bs-toggle="tab" data-bs-target="#nav-ripe" type="button" role="tab" aria-controls="nav-ripe" aria-selected="true">Get From RIPE.net</button>
+                <button class="nav-link" id="nav-input-tab" data-bs-toggle="tab" data-bs-target="#nav-input" type="button" role="tab" aria-controls="nav-input" aria-selected="false">Input</button>
+                <button class="nav-link" id="nav-abcdef-tab" data-bs-toggle="tab" data-bs-target="#nav-abcdef" type="button" role="tab" aria-controls="nav-abcdef" aria-selected="false">Contact</button>
             </div>
         </nav>
 
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="tab-pane fade show active" id="nav-ripe" role="tabpanel" aria-labelledby="nav-ripe-tab">
                 <h3>Get From RIPE.net</h3>
                 <form id="asn_form">
                     <div>
@@ -39,16 +39,36 @@
                         <input class="w-100 p-1" type="text" id="asn" placeholder="ASN" placeholder="AS16135,AS9121" value="AS16135,AS9121">
                     </div>
                     <button type="button" class="btn btn-primary my-1" id="getIPs">Get IP Ranges</button>
+
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-reversed-cidr-tab" data-bs-toggle="tab" data-bs-target="#nav-reversed-cidr" type="button" role="tab" aria-controls="nav-reversed-cidr" aria-selected="true">Reversed CIDR</button>
+                            <button class="nav-link" id="nav-cidr-by-asn-tab" data-bs-toggle="tab" data-bs-target="#nav-cidr-by-asn" type="button" role="tab" aria-controls="nav-cidr-by-asn" aria-selected="false">CIDR by ASN</button>
+                            <button class="nav-link" id="nav-sorted-no-overlap-tab" data-bs-toggle="tab" data-bs-target="#nav-sorted-no-overlap" type="button" role="tab" aria-controls="nav-sorted-no-overlap" aria-selected="false">Sorted-No Overlap</button>
+                        </div>
+                    </nav>
+
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-reversed-cidr" role="tabpanel" aria-labelledby="nav-reversed-cidr-tab">
+                            <textarea class="form-control" id="ripe_reversed_cidr" rows="15"></textarea>
+                        </div>
+                        <div class="tab-pane fade" id="nav-cidr-by-asn" role="tabpanel" aria-labelledby="nav-cidr-by-asn-tab">
+                            
+                        </div>
+                        <div class="tab-pane fade" id="nav-sorted-no-overlap" role="tabpanel" aria-labelledby="nav-sorted-no-overlap-tab">
+                
+                        </div>
+                    </div>
                     
-                    <textarea class="form-control" id="textAreaForRipe" rows="15"></textarea>
+                    
                 </form>
             </div>
 
-            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="tab-pane fade" id="nav-input" role="tabpanel" aria-labelledby="nav-input-tab">
 
             </div>
 
-            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <div class="tab-pane fade" id="nav-abcdef" role="tabpanel" aria-labelledby="nav-abcdef-tab">
 
             </div>
         </div>

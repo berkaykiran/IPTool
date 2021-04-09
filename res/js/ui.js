@@ -33,10 +33,23 @@ document.getElementById('getIPs').onclick = () => {
         console.log(mergedDecimalIpRangeArray.join('\n'));
         console.log(reversedDecimalIpRange.join('\n'));
 
-        textAreaForRipe.value = optimizedRange.join('\n');
+        ripe_reversed_cidr.value = optimizedRange.join('\n');
+        
+        document.getElementById('nav-cidr-by-asn').innerHTML = '';
+        IpObjects.map(el => el.map(item => `${item.ipLowStr}/${item.prefixSize}`).join('\n')).forEach((value, i) => {
+            document.getElementById('nav-cidr-by-asn').innerHTML += `<label for="ripe_cidr_by_asn${i}">${temp_asn_array[i]} CIDR:</label>
+            <textarea class="form-control mb-2" id="ripe_cidr_by_asn${i}" rows="10">${value}</textarea>`;
+        });
+
+        document.getElementById('nav-sorted-no-overlap').innerHTML = '';
+        IpObjects.map(el => filterOverlaps([...new Set(el)].sort((a, b) => a.ipLow - b.ipLow), 'ipLow', 'ipHigh').map(item => `${item.ipLowStr}/${item.prefixSize}`).join('\n')).forEach((value, i) => {
+            document.getElementById('nav-sorted-no-overlap').innerHTML += `<label for="ripe_cidr_by_asn_sorted_no_overlap${i}">${temp_asn_array[i]} CIDR:</label>
+            <textarea class="form-control mb-2" id="ripe_cidr_by_asn_sorted_no_overlap${i}" rows="10">${value}</textarea>`;
+        });
+
 
     }).catch(error => {
-        textAreaForRipe.value = `ASN ${error.message}`;
+        ripe_reversed_cidr.value = `ASN ${error.message}`;
         console.log(error.message);
     });;
 }

@@ -6,11 +6,11 @@ function get(asn) {
             if (req.status == 200) {
                 resolve(JSON.parse(req.response).objects.object);
             } else {
-                reject(Error(req.statusText));
+                reject(Error(`req.statusText ${asn}`));
             }
         };
         req.onerror = function () {
-            reject(Error("Network Error"));
+            reject(Error(`Network Error ${asn}`));
         };
         req.send();
     });
