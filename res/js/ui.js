@@ -52,7 +52,7 @@ document.getElementById('getIPs').onclick = () => {
 
 
     }).catch(error => {
-        ripe_reversed_cidr.value = `ASN ${error.message}`;
+        ripe_reversed_cidr.value = `ASN ${error.message}:`;
         console.log(error.message);
     });;
 }
