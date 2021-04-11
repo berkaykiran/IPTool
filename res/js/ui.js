@@ -1,6 +1,11 @@
 var sortedIpObjects, decimalIpArray;
+let nav_cidr_by_asn = document.getElementById('nav-cidr-by-asn');
+let nav_sorted_no_overlap = document.getElementById('nav-sorted-no-overlap');
 
 document.getElementById('getIPs').onclick = () => {
+    nav_cidr_by_asn.innerHTML = '';
+    nav_sorted_no_overlap.innerHTML = '';
+
     temp_asn_array = asn.value.split(',');
     promises = temp_asn_array.map(el => get(el));
     Promise.all(promises).then(values => {
@@ -35,13 +40,11 @@ document.getElementById('getIPs').onclick = () => {
 
         ripe_reversed_cidr.value = optimizedRange.join('\n');
         
-        document.getElementById('nav-cidr-by-asn').innerHTML = '';
         IpObjects.map(el => el.map(item => `${item.ipLowStr}/${item.prefixSize}`).join('\n')).forEach((value, i) => {
             document.getElementById('nav-cidr-by-asn').innerHTML += `<label for="ripe_cidr_by_asn${i}">${temp_asn_array[i]} CIDR:</label>
             <textarea class="form-control mb-2" id="ripe_cidr_by_asn${i}" rows="10">${value}</textarea>`;
         });
 
-        document.getElementById('nav-sorted-no-overlap').innerHTML = '';
         IpObjects.map(el => filterOverlaps([...new Set(el)].sort((a, b) => a.ipLow - b.ipLow), 'ipLow', 'ipHigh').map(item => `${item.ipLowStr}/${item.prefixSize}`).join('\n')).forEach((value, i) => {
             document.getElementById('nav-sorted-no-overlap').innerHTML += `<label for="ripe_cidr_by_asn_sorted_no_overlap${i}">${temp_asn_array[i]} CIDR:</label>
             <textarea class="form-control mb-2" id="ripe_cidr_by_asn_sorted_no_overlap${i}" rows="10">${value}</textarea>`;
