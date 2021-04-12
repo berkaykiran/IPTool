@@ -6,7 +6,7 @@ function get(asn) {
             if (req.status == 200) {
                 resolve(JSON.parse(req.response).objects.object);
             } else {
-                reject(Error(`${req.statusText} ${asn}`));
+                reject(Error(`${req.statusText}: ${asn}`));
             }
         };
         req.onerror = function () {
