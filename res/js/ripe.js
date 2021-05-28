@@ -1,4 +1,9 @@
-function get(asn) {
+/**
+ * Gets the IP addresses and returns a promise object with IP Objects
+ * @param {string} asn
+ * @returns {promise|Error}
+ */
+function getASNFromRipeNet(asn) {
     return new Promise(function (resolve, reject) {
         var req = new XMLHttpRequest();
         req.open('GET', `get.php?asn=${asn}`, true);
@@ -13,6 +18,24 @@ function get(asn) {
             reject(Error(`Network Error ${asn}`));
         };
         req.send();
+    });
+}
+
+/**
+ * Gets the IP addresses and returns a promise object with IP Objects
+ * @param {string} asn
+ * @returns {promise|Error}
+ */
+function betterGetASN(asn) {
+    fetch(`https://rest.db.ripe.net/search.json?query-string=${asn}&inverse-attribute=origin&type-filter=route&flags=no-referenced&flags=no-irt&source=RIPE`, {
+        mode: 'no-cors',
+        headers: {
+            'Accept': 'text/html'
+        }
+    })
+    .then(response => console.log(response))
+    .then(data => {
+        console.log('Success:', data);
     });
 }
 
