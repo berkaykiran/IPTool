@@ -33,10 +33,10 @@ document.getElementById('getIPs').onclick = () => {
         //Reversed IP CIDR range
         optimizedRange = returnOptimizedRange(reversedDecimalIpRange, 'ipLowStr', 'prefixSize');
 
-        console.log(sortedIpObjects);
+        /* console.log(sortedIpObjects);
         console.log(decimalIpArray.join('\n'));
         console.log(mergedDecimalIpRangeArray.join('\n'));
-        console.log(reversedDecimalIpRange.join('\n'));
+        console.log(reversedDecimalIpRange.join('\n')); */
 
         ripe_reversed_cidr.value = optimizedRange.join('\n');
 
